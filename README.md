@@ -13,3 +13,7 @@
 
 good luck
 爸爸来啦  pushpushpush
+
+Duxy: 我第一题，你第二题，谁赞成？谁反对？
+
+
