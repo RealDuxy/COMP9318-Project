@@ -6,6 +6,9 @@
 @Software: PyCharm
 """
 import helper as h
+import main
+import pickle
+import time
 
 def query(queries, codebooks, codes, T):
     '''
@@ -17,3 +20,7 @@ def query(queries, codebooks, codes, T):
     :return:
     '''
     return candidates
+
+# runtest for Q2
+if __name__ == '__main__':
+    main.runMain()

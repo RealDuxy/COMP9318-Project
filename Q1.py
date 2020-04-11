@@ -8,9 +8,10 @@
 """
 
 import helper as h
+import pickle
+import time
 
-
-def PQ(data, P, init_centroids, max_iter):
+def pq(data, P, init_centroids, max_iter):
     '''
     PQ method working with L1 distance
 
@@ -31,8 +32,17 @@ def PQ(data, P, init_centroids, max_iter):
 
     return codebooks, codes
 
+# runtest for Q1
 if __name__ == '__main__':
-    PQ(1,1,1,1)
+    with open('./toy_example/Data_File', 'rb') as f:
+        Data_File = pickle.load(f, encoding='bytes')
+    with open('./toy_example/Centroids_File', 'rb') as f:
+        Centroids_File = pickle.load(f, encoding='bytes')
+    start = time.time()
+    codebooks, codes = pq(data=Data_File, P=2, init_centroids=Centroids_File, max_iter=20)
+    end = time.time()
+    time_cost_1 = end - start
+    print(f'Runtime: {time_cost_1}')
 
 
 
