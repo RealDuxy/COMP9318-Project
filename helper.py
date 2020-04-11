@@ -11,6 +11,7 @@ import time
 
 def distance(norm=1):
     '''
+    计算L1 distance
     :param norm: L-norm distance
     :return: distance
     '''
@@ -44,7 +45,8 @@ def display_query():
         Query_File = pickle.load(f, encoding='bytes')
     print(Query_File)
 
-
-display_centroids()
-display_data()
-display_query()
+# runtest
+if __name__ == '__main__':
+    display_centroids()
+    display_data()
+    display_query()

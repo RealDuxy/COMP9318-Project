@@ -23,11 +23,19 @@ def PQ(data, P, init_centroids, max_iter):
     :return: codebooks: an array with shape (P, K, M/P) and dtype='float32'
              codes: an array with shape (N, P) and dtype=='uint8'
     '''
-
+    codebooks = 1
+    codes = 1
     distance  = h.distance(norm=1)
+    print(distance)
 
 
     return codebooks, codes
+
+if __name__ == '__main__':
+    PQ(1,1,1,1)
+
+
+
 
 
 
