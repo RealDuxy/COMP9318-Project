@@ -24,7 +24,11 @@ def PQ(data, P, init_centroids, max_iter):
              codes: an array with shape (N, P) and dtype=='uint8'
     '''
 
-    distance  = h.distance()
+    distance  = h.distance(norm=1)
 
 
     return codebooks, codes
+
+
+
+

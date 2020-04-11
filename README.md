@@ -9,9 +9,10 @@
 
 每次更新push更新后要写说明
 
-之后统一复制到submisiion里面
+之后统一复制到submission里面
 
-good luck
+good luck    
+
 爸爸来啦  pushpushpush
 
 Duxy: 我第一题，你第二题，谁赞成？谁反对？

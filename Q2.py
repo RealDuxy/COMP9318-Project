@@ -7,3 +7,13 @@
 """
 import helper as h
 
+def query(queries, codebooks, codes, T):
+    '''
+
+    :param queries:
+    :param codebooks:
+    :param codes:
+    :param T:
+    :return:
+    '''
+    return candidates
