@@ -27,9 +27,6 @@ def pq(data, P, init_centroids, max_iter):
     codebooks = 1
     codes = 1
     distance  = h.distance(norm=1)
-    print(distance)
-
-
     return codebooks, codes
 
 # runtest for Q1

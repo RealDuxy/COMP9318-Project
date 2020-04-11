@@ -19,6 +19,7 @@ def query(queries, codebooks, codes, T):
     :param T:
     :return:
     '''
+    candidates=1
     return candidates
 
 # runtest for Q2

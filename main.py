@@ -31,16 +31,16 @@ def runMain():
     # How to run your implementation for Part 2
     with open('./toy_example/Query_File', 'rb') as f:
         Query_File = pickle.load(f, encoding = 'bytes')
-    queries = pickle.load(Query_File, encoding = 'bytes')
+    # queries = pickle.load(Query_File, encoding = 'bytes')
     start = time.time()
-    candidates = Q2.query(queries, codebooks, codes, T=10)
+    candidates = Q2.query(Query_File, codebooks, codes, T=10)
     end = time.time()
     time_cost_2 = end - start
 
     print(f'Q2 runtime: {time_cost_2}')
 
     # output for part 2.
-    print(candidates)
+    print(f'candidates: {candidates}')
 
 # runtest
 if __name__ == '__main__':
