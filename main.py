@@ -24,6 +24,7 @@ def runMain():
     time_cost_1 = end - start
 
     print(f'Q1 runtime: {time_cost_1}')
+    # output for part2
     print(f'codebooks: {codebooks}')
     print(f'codes: {codes}')
 
@@ -38,7 +39,6 @@ def runMain():
     time_cost_2 = end - start
 
     print(f'Q2 runtime: {time_cost_2}')
-
     # output for part 2.
     print(f'candidates: {candidates}')
 
