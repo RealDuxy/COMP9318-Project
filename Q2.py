@@ -2,7 +2,7 @@
 """
 @File    : Q2.py
 @Time    : 2020-04-11 03:50
-@Author  : Chloe
+@Author  : Chloe Duxy
 @Software: PyCharm
 """
 import helper as h

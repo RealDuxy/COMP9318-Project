@@ -2,7 +2,7 @@
 """
 @File    : Q1.py
 @Time    : 2020-04-11 03:50
-@Author  : Duxy
+@Author  : Duxy Chole
 @Email   : du.xi.yang@qq.com
 @Software: PyCharm
 """
