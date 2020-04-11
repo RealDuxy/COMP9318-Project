@@ -29,6 +29,7 @@ def pq(data, P, init_centroids, max_iter):
     distance  = h.distance(norm=1)
     return codebooks, codes
 
+
 # runtest for Q1
 if __name__ == '__main__':
     with open('./toy_example/Data_File', 'rb') as f:
