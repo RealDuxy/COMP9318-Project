@@ -13,13 +13,10 @@ Duxy: 所有的代码，报告都在这个仓库里
 
 good luck    
 
-Chole: 爸爸来啦  pushpushpush
+Chloe: 爸爸来啦  pushpushpush
 
 Duxy: 我第一题，你第二题，谁赞成？谁反对？
-
 Duxy: 好无趣，码代码真的好无趣......
-
 Duxy: 你搁哪儿嘎哈呢？ 还不快写！
 
-Chole:我掐鸡呢，你都不跟我们玩了，搁哪儿嘎哈呢！
-Chole:我忙着呢！ 你快写！
+Chloe: 15号我开始整这个，可以督促一下我，毕竟我比较不自律，😁
