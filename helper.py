@@ -47,6 +47,6 @@ def display_query():
 
 # runtest
 if __name__ == '__main__':
-    display_centroids()
+    # display_centroids()
     display_data()
     # display_query()
