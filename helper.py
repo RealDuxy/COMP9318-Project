@@ -49,4 +49,4 @@ def display_query():
 if __name__ == '__main__':
     display_centroids()
     display_data()
-    display_query()
+    # display_query()
