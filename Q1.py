@@ -7,10 +7,15 @@
 @Software: PyCharm
 """
 
-import helper as h
+
 import numpy as np
 import pickle
 import time
+
+data_path = './toy_example/example/Data_File_1'
+centorid_path = './toy_example/example/Centroids_File_1'
+
+
 
 def pq(data, P, init_centroids, max_iter=2):
     '''
@@ -27,14 +32,14 @@ def pq(data, P, init_centroids, max_iter=2):
     '''
     data_blocks = split_data(data,P)
     # print(len(data_blocks))
-    iter = 1
-    codebooks=[]
-    code=[]
+    epoch = 1
+    codebooks = []
+    code = []
     for i in range(P):
         centroids = init_centroids[i]
         data_block = data_blocks[i]
-        while iter <= max_iter:
-            print(f'iter :{iter}       max_iter: {max_iter}')
+        while epoch <= max_iter:
+            print(f'epoch :{epoch}       max_iter: {max_iter}')
 
 
                 # if iter==2:
@@ -43,7 +48,7 @@ def pq(data, P, init_centroids, max_iter=2):
             centroids = K_means(centroids,data_block)
             #     print("down")
             # print(f"iter: {iter}")
-            iter += 1
+            epoch += 1
         # now we get new_centroid = initial_centroid = (p,k,m/p) = codebooks
         codebooks.append(centroids)
         code.append(np.apply_along_axis(min_distance,1,arr=data_block,centroids=centroids))
@@ -133,35 +138,25 @@ def update_centroid(centroid,all_cluster):
     return centroid
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # runtest for Q1
 if __name__ == '__main__':
-    with open('./toy_example/Data_File', 'rb') as f:
+    with open(data_path, 'rb') as f:
         Data_File = pickle.load(f, encoding='bytes')
-    with open('./toy_example/Centroids_File', 'rb') as f:
+    with open(centorid_path, 'rb') as f:
         Centroids_File = pickle.load(f, encoding='bytes')
+    # print(Data_File[0])
+    # print(Data_File.shape)
+    # print(Centroids_File[0])
+    # print(Centroids_File.shape)
     start = time.time()
-    codebooks, codes = pq(data=Data_File, P=2, init_centroids=Centroids_File, max_iter=3)
+    codebooks, codes = pq(data=Data_File, P=2, init_centroids=Centroids_File, max_iter=20)
     end = time.time()
     time_cost_1 = end - start
     print(f'Runtime: {time_cost_1}')
     print(codebooks)
+    print(codebooks[0].shape)
     print(codes)
+    print(codes[0].shape)
 
 
 

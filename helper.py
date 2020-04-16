@@ -5,48 +5,53 @@
 @Author  : Duxy, Chloe
 @Software: PyCharm
 """
-import submission
+
 import pickle
-import time
 
-def distance(norm=1):
-    '''
-    计算L1 distance
-    :param norm: L-norm distance
-    :return: distance
-    '''
-    distance = 1
-    return distance
+import numpy as np
+data_path = './toy_example/example/Data_File_1'
+centorid_path = './toy_example/example/Centroids_File_1'
+codebooks_path = './toy_example/example/Codebooks_1'
+codes_path = './toy_example/example/Codes_1'
 
-def display_centroids():
-    '''
-    将numpy二进制文件 centroids_file 可视化
-    :return: None
-    '''
-    with open('./toy_example/Centroids_File', 'rb') as f:
-        Centroids_File = pickle.load(f, encoding='bytes')
-    print(Centroids_File)
-
-def display_data():
+def display_data(path):
     '''
     将numpy二进制文件 data_file 可视化
     :return: None
     '''
-    with open('./toy_example/Data_File', 'rb') as f:
+    with open(path, 'rb') as f:
         Data_File = pickle.load(f, encoding='bytes')
     print(Data_File)
+    print(Data_File.shape)
 
-def display_query():
+
+def split_data(data, P=2,axis=1):
     '''
-    将numpy二进制文件 query_file 可视化
-    :return: None
+    split data into P parts
+    :param data: (N,M)
+    :param P:
+    :return: (P,N,M/P) A list of sub-arrays.
     '''
-    with open('./toy_example/Query_File', 'rb') as f:
-        Query_File = pickle.load(f, encoding='bytes')
-    print(Query_File)
+    return np.split(data,P,axis)
+
+def L1_distance(point1,point2):
+    '''
+    L1 distance
+    :param point1: (1,M)
+    :param point2: (1,M)
+    :return: L1 distance: float64
+    '''
+    # print(point1.shape, point2.shape)
+    return np.sum(np.abs(point2 - point1))
+
 
 # runtest
 if __name__ == '__main__':
-    # display_centroids()
-    display_data()
+    display_data(data_path)
+    display_data(centorid_path)
+    display_data(codebooks_path)
+    display_data(codes_path)
+
     # display_query()
+    # split_data()
+    # L1_distance()
