@@ -9,10 +9,10 @@
 import pickle
 
 import numpy as np
-data_path = './toy_example/example/Data_File_1'
-centorid_path = './toy_example/example/Centroids_File_1'
-codebooks_path = './toy_example/example/Codebooks_1'
-codes_path = './toy_example/example/Codes_1'
+data_path = './toy_example/example/Data_File_2'
+centorid_path = './toy_example/example/Centroids_File_2'
+codebooks_path = './toy_example/example/Codebooks_2'
+codes_path = './toy_example/example/Codes_2'
 
 def display_data(path):
     '''

@@ -12,8 +12,10 @@ import numpy as np
 import pickle
 import time
 
-data_path = './toy_example/example/Data_File_1'
-centorid_path = './toy_example/example/Centroids_File_1'
+data_path = './toy_example/example/Data_File_2'
+centorid_path = './toy_example/example/Centroids_File_2'
+codebooks_path = './toy_example/example/Codebooks_2'
+codes_path = './toy_example/example/Codes_2'
 
 
 
@@ -50,11 +52,12 @@ def pq(data, P, init_centroids, max_iter=2):
             # print(f"iter: {iter}")
             epoch += 1
         # now we get new_centroid = initial_centroid = (p,k,m/p) = codebooks
-        codebooks.append(centroids)
-        code.append(np.apply_along_axis(min_distance,1,arr=data_block,centroids=centroids))
+        codebooks.append(centroids.tolist())
+        code.append(np.apply_along_axis(min_distance,1,arr=data_block,centroids=centroids).tolist())
 
 
-    return codebooks, code
+
+    return np.array(codebooks), np.array(code)
 
 
 def split_data(data, P=2,axis=1):
@@ -149,14 +152,14 @@ if __name__ == '__main__':
     # print(Centroids_File[0])
     # print(Centroids_File.shape)
     start = time.time()
-    codebooks, codes = pq(data=Data_File, P=2, init_centroids=Centroids_File, max_iter=20)
+    codebooks, codes = pq(data=Data_File, P=4, init_centroids=Centroids_File, max_iter=20)
     end = time.time()
     time_cost_1 = end - start
     print(f'Runtime: {time_cost_1}')
     print(codebooks)
-    print(codebooks[0].shape)
+    print(codebooks.shape)
     print(codes)
-    print(codes[0].shape)
+    print(codes.shape)
 
 
 
