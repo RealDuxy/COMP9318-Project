@@ -41,13 +41,15 @@ def pq(data, P, init_centroids, max_iter=20):
         data_block = data_blocks[i]
 
         while epoch <= max_iter:
-            print(f'epoch :{epoch}       max_iter: {max_iter}')
+            # print(f'epoch :{epoch}       max_iter: {max_iter}')
             centroids = K_means(centroids, data_block)
             epoch += 1
         # now we get new_centroid = initial_centroid = (p,k,m/p) = codebooks
         codebooks.append(centroids.tolist())
-        code.append(min_distance(data_block, centroids).tolist())
-
+        _, nearest_index = min_distance(data_block, centroids)
+        # nearest_index = np.transpose(nearest_index)
+        code.append(nearest_index.tolist())
+    code = np.transpose(code)
     return np.array(codebooks), np.array(code)
 
 
@@ -68,7 +70,7 @@ def K_means(centroid, data):
     :return: new centroid (K,M)
     '''
 
-    all_cluster = min_distance(data, centroid)
+    all_cluster,_ = min_distance(data, centroid)
     # all_cluster = min_distance(line_point=)
     new_centroids = np.apply_along_axis(update_centroid, 1, arr=centroid, all_cluster=all_cluster)
     return new_centroids
@@ -83,7 +85,7 @@ def min_distance(points, centroids):
     distances = L1_distance(points, centroids)
     nearest_centroid_index = np.argmin(distances,axis=1)
     nearest_centroid = centroids[nearest_centroid_index]
-    return nearest_centroid
+    return nearest_centroid, nearest_centroid_index
 
 def L1_distance(points,centroids):
     '''
