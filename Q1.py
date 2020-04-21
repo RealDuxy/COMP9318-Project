@@ -33,7 +33,6 @@ def pq(data, P, init_centroids, max_iter=20):
              codes: an array with shape (N, P) and dtype=='uint8'
     '''
     data_blocks = split_data(data,P)
-    # print(len(data_blocks))
     epoch = 1
     codebooks = []
     code = []
@@ -43,30 +42,11 @@ def pq(data, P, init_centroids, max_iter=20):
 
         while epoch <= max_iter:
             print(f'epoch :{epoch}       max_iter: {max_iter}')
-
-
-                # if iter==2:
-                #     print(centroids,centroids.shape)
-                #     print(data_block,data_block.shape)
-            # old = centroids.copy()
             centroids = K_means(centroids, data_block)
-            #     print("down")
-            # print(f"iter: {iter}")
             epoch += 1
-
-            # if (old[0] == centroids[0]).all():
-                        #     break
-
         # now we get new_centroid = initial_centroid = (p,k,m/p) = codebooks
-        # codebooks.append(centroids.tolist())
-
-
         codebooks.append(centroids.tolist())
-        # code.append(np.apply_along_axis(min_distance,1,arr=data_block,centroids=centroids).tolist())
         code.append(min_distance(data_block, centroids).tolist())
-
-
-
 
     return np.array(codebooks), np.array(code)
 
@@ -154,10 +134,6 @@ if __name__ == '__main__':
         Data_File = pickle.load(f, encoding='bytes')
     with open(centorid_path, 'rb') as f:
         Centroids_File = pickle.load(f, encoding='bytes')
-    # print(Data_File[0])
-    # print(Data_File.shape)
-    # print(Centroids_File[0])
-    # print(Centroids_File.shape)
     start = time.time()
     codebooks, codes = pq(data=Data_File, P=p, init_centroids=Centroids_File, max_iter=20)
     end = time.time()
