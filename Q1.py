@@ -49,7 +49,7 @@ def pq(data, P, init_centroids, max_iter=20):
                 #     print(centroids,centroids.shape)
                 #     print(data_block,data_block.shape)
             # old = centroids.copy()
-            centroids = K_means(centroids,data_block)
+            centroids = K_means(centroids, data_block)
             #     print("down")
             # print(f"iter: {iter}")
             epoch += 1
@@ -63,7 +63,7 @@ def pq(data, P, init_centroids, max_iter=20):
 
         codebooks.append(centroids.tolist())
         # code.append(np.apply_along_axis(min_distance,1,arr=data_block,centroids=centroids).tolist())
-        code.append(min_distance(data_block,centroids).tolist())
+        code.append(min_distance(data_block, centroids).tolist())
 
 
 
@@ -78,9 +78,9 @@ def split_data(data, P=2,axis=1):
     :param P:
     :return: (P,N,M/P) A list of sub-arrays.
     '''
-    return np.split(data,P,axis)
+    return np.split(data, P, axis)
 
-def K_means(centroid,data):
+def K_means(centroid, data):
     '''
     K_means
     :param data: (N,M)
@@ -88,7 +88,7 @@ def K_means(centroid,data):
     :return: new centroid (K,M)
     '''
 
-    all_cluster = min_distance(data,centroid)
+    all_cluster = min_distance(data, centroid)
     # all_cluster = min_distance(line_point=)
     new_centroids = np.apply_along_axis(update_centroid, 1, arr=centroid, all_cluster=all_cluster)
     return new_centroids
@@ -100,7 +100,7 @@ def min_distance(points, centroids):
     :param centroids: (K,M)
     :return: nearest_centroid: (N,M) each points' nearest_centroid
     '''
-    distances = L1_distance(points,centroids)
+    distances = L1_distance(points, centroids)
     nearest_centroid_index = np.argmin(distances,axis=1)
     nearest_centroid = centroids[nearest_centroid_index]
     return nearest_centroid
@@ -112,7 +112,7 @@ def L1_distance(points,centroids):
     :param centroids: (K,M)
     :return: np.array with shape(N,K) each line is the L1 distance of (point, all centroids)
     '''
-    return np.abs(points[:,None]- centroids).sum(axis=2)
+    return np.abs(points[:, None] - centroids).sum(axis=2)
 
 
 

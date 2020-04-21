@@ -18,7 +18,7 @@ centorid_path = './toy_example/example/Centroids_File_2'
 codebooks_path = './toy_example/example/Codebooks_2'
 codes_path = './toy_example/example/Codes_2'
 query_path = './toy_example/example/Query_File_2'
-p = 2
+p=4
 def runMain():
     # How to run your implementation for Part 1
     with open(data_path, 'rb') as f:
