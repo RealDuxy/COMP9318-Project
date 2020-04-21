@@ -1,4 +1,7 @@
 import numpy as np
+import main
+import pickle
+
 
 
 def pq(data, P, init_centroids, max_iter=20):
@@ -23,7 +26,7 @@ def pq(data, P, init_centroids, max_iter=20):
         data_block = data_blocks[i]
 
         while epoch <= max_iter:
-            # print(f'epoch :{epoch}       max_iter: {max_iter}')
+            print(f'epoch :{epoch}       max_iter: {max_iter}')
             centroids = K_means(centroids, data_block)
             epoch += 1
         # now we get new_centroid = initial_centroid = (p,k,m/p) = codebooks
@@ -173,4 +176,6 @@ def query(queries, codebooks, codes, T):
         point =  split_data(queries[i], P,axis=0)    
         nearest_point = find_nearest(point,codebooks, codes, T)  
         candidates.append(nearest_point)   
-    return candidates 
+    return candidates
+if __name__ == '__main__':
+    main.runMain()

@@ -13,12 +13,20 @@ import pickle
 import time
 
 
-data_path = './toy_example/example/Data_File_2'
-centorid_path = './toy_example/example/Centroids_File_2'
-codebooks_path = './toy_example/example/Codebooks_2'
-codes_path = './toy_example/example/Codes_2'
-query_path = './toy_example/example/Query_File_2'
-p=4
+
+with open('./toy_example/example/Codebooks_1', 'rb') as f:
+    codebooks_2 = pickle.load(f, encoding = 'bytes')   # (2, 256, 64)
+with open('./toy_example/example/Codes_1', 'rb') as f:
+    codes_2 = pickle.load(f, encoding = 'bytes') # ( N, P)  (500, 2)
+with open('./toy_example/example/Candidates_1', 'rb') as f:
+    candidates_2 = pickle.load(f, encoding = 'bytes')
+
+data_path = './toy_example/example/Data_File_1'
+centorid_path = './toy_example/example/Centroids_File_1'
+codebooks_path = './toy_example/example/Codebooks_1'
+codes_path = './toy_example/example/Codes_1'
+query_path = './toy_example/example/Query_File_1'
+p=2
 def runMain():
     # How to run your implementation for Part 1
     with open(data_path, 'rb') as f:
@@ -32,12 +40,10 @@ def runMain():
     print(f'Q1 runtime: {time_cost_1}')
     # output for part2
     print(f'codebooks: {codebooks}')
+    print(f'real {codebooks_2}')
     print(f'codes: {codes}')
+    print(f'real code {codes_2}')
 
-    with open(codebooks_path, 'rb') as f:
-        codebooks = pickle.load(f, encoding='bytes')
-    with open(codes_path, 'rb') as f:
-        codes = pickle.load(f, encoding='bytes')
     # How to run your implementation for Part 2
     with open(query_path, 'rb') as f:
         Query_File = pickle.load(f, encoding = 'bytes')
@@ -49,7 +55,7 @@ def runMain():
 
     print(f'Q2 runtime: {time_cost_2}')
     # output for part 2.
-    print(f'candidates: {candidates}')
+    print(f'candidates: {candidates==candidates_2}')
 
 # runtest
 if __name__ == '__main__':
