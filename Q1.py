@@ -12,11 +12,11 @@ import numpy as np
 import pickle
 import time
 
-data_path = './toy_example/example/Data_File_1'
-centorid_path = './toy_example/example/Centroids_File_1'
-codebooks_path = './toy_example/example/Codebooks_1'
-codes_path = './toy_example/example/Codes_1'
-
+data_path = './toy_example/example/Data_File_2'
+centorid_path = './toy_example/example/Centroids_File_2'
+codebooks_path = './toy_example/example/Codebooks_2'
+codes_path = './toy_example/example/Codes_2'
+p = 4
 
 
 def pq(data, P, init_centroids, max_iter=20):
@@ -159,7 +159,7 @@ if __name__ == '__main__':
     # print(Centroids_File[0])
     # print(Centroids_File.shape)
     start = time.time()
-    codebooks, codes = pq(data=Data_File, P=2, init_centroids=Centroids_File, max_iter=20)
+    codebooks, codes = pq(data=Data_File, P=p, init_centroids=Centroids_File, max_iter=20)
     end = time.time()
     time_cost_1 = end - start
     print(f'Runtime: {time_cost_1}')

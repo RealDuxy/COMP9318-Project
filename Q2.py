@@ -9,6 +9,7 @@ import helper as h
 import main
 import pickle
 import time
+import numpy as np
 def split_data(data, P=2,axis=1):
     '''
     split data into P parts
@@ -70,9 +71,10 @@ def query(queries, codebooks, codes, T):
     '''
     candidates = []  
     N,M = queries.shape
+    n,P = codes.shape
     print(N,M)
     for i in range(N):
-        point =  split_data(queries[i], P=2,axis=0)    
+        point =  split_data(queries[i], P,axis=0)
         nearest_point = find_nearest(point,codebooks, codes, T)  
         candidates.append(nearest_point)  
     return candidates

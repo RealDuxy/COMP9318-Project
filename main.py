@@ -12,25 +12,34 @@ import Q2
 import pickle
 import time
 
+
+data_path = './toy_example/example/Data_File_2'
+centorid_path = './toy_example/example/Centroids_File_2'
+codebooks_path = './toy_example/example/Codebooks_2'
+codes_path = './toy_example/example/Codes_2'
+query_path = './toy_example/example/Query_File_2'
+p = 2
 def runMain():
     # How to run your implementation for Part 1
-    with open('./toy_example/Data_File', 'rb') as f:
-        Data_File = pickle.load(f, encoding = 'bytes')
-    with open('./toy_example/Centroids_File', 'rb') as f:
-        Centroids_File = pickle.load(f, encoding = 'bytes')
+    with open(data_path, 'rb') as f:
+        Data_File = pickle.load(f, encoding='bytes')
+    with open(centorid_path, 'rb') as f:
+        Centroids_File = pickle.load(f, encoding='bytes')
     start = time.time()
-    codebooks, codes = Q1.pq(data=Data_File, P=2, init_centroids=Centroids_File, max_iter = 20)
+    codebooks, codes = Q1.pq(data=Data_File, P=p, init_centroids=Centroids_File, max_iter=20)
     end = time.time()
     time_cost_1 = end - start
-
     print(f'Q1 runtime: {time_cost_1}')
     # output for part2
     print(f'codebooks: {codebooks}')
     print(f'codes: {codes}')
 
-
+    with open(codebooks_path, 'rb') as f:
+        codebooks = pickle.load(f, encoding='bytes')
+    with open(codes_path, 'rb') as f:
+        codes = pickle.load(f, encoding='bytes')
     # How to run your implementation for Part 2
-    with open('./toy_example/Query_File', 'rb') as f:
+    with open(query_path, 'rb') as f:
         Query_File = pickle.load(f, encoding = 'bytes')
     # queries = pickle.load(Query_File, encoding = 'bytes')
     start = time.time()
