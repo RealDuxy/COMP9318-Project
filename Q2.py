@@ -10,6 +10,14 @@ import main
 import pickle
 import time
 import numpy as np
+with open('./example/Query_File_2', 'rb') as f:
+    Query_2 = pickle.load(f, encoding = 'bytes')   # query: (10, 128)     (10,256) 
+with open('./example/Codebooks_2', 'rb') as f:
+    codebooks_2 = pickle.load(f, encoding = 'bytes')   # (2, 256, 64)
+with open('./example/Codes_2', 'rb') as f:
+    codes_2 = pickle.load(f, encoding = 'bytes') # ( N, P)  (500, 2)
+with open('./example/Candidates_2', 'rb') as f:
+    candidates_2 = pickle.load(f, encoding = 'bytes')
 def split_data(data, P=2,axis=1):
     '''
     split data into P parts
