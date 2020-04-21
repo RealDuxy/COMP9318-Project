@@ -12,14 +12,14 @@ import numpy as np
 import pickle
 import time
 
-data_path = './toy_example/example/Data_File_2'
-centorid_path = './toy_example/example/Centroids_File_2'
-codebooks_path = './toy_example/example/Codebooks_2'
-codes_path = './toy_example/example/Codes_2'
+data_path = './toy_example/example/Data_File_1'
+centorid_path = './toy_example/example/Centroids_File_1'
+codebooks_path = './toy_example/example/Codebooks_1'
+codes_path = './toy_example/example/Codes_1'
 
 
 
-def pq(data, P, init_centroids, max_iter=2):
+def pq(data, P, init_centroids, max_iter=20):
     '''
     PQ method working with L1 distance
 
@@ -40,6 +40,7 @@ def pq(data, P, init_centroids, max_iter=2):
     for i in range(P):
         centroids = init_centroids[i]
         data_block = data_blocks[i]
+
         while epoch <= max_iter:
             print(f'epoch :{epoch}       max_iter: {max_iter}')
 
@@ -47,13 +48,23 @@ def pq(data, P, init_centroids, max_iter=2):
                 # if iter==2:
                 #     print(centroids,centroids.shape)
                 #     print(data_block,data_block.shape)
+            # old = centroids.copy()
             centroids = K_means(centroids,data_block)
             #     print("down")
             # print(f"iter: {iter}")
             epoch += 1
+
+            # if (old[0] == centroids[0]).all():
+                        #     break
+
         # now we get new_centroid = initial_centroid = (p,k,m/p) = codebooks
+        # codebooks.append(centroids.tolist())
+
+
         codebooks.append(centroids.tolist())
-        code.append(np.apply_along_axis(min_distance,1,arr=data_block,centroids=centroids).tolist())
+        # code.append(np.apply_along_axis(min_distance,1,arr=data_block,centroids=centroids).tolist())
+        code.append(min_distance(data_block,centroids).tolist())
+
 
 
 
@@ -77,35 +88,31 @@ def K_means(centroid,data):
     :return: new centroid (K,M)
     '''
 
-    all_cluster = np.apply_along_axis(min_distance, 1, arr=data, centroids=centroid)
+    all_cluster = min_distance(data,centroid)
+    # all_cluster = min_distance(line_point=)
     new_centroids = np.apply_along_axis(update_centroid, 1, arr=centroid, all_cluster=all_cluster)
     return new_centroids
 
-def min_distance(line_point, centroids):
+def min_distance(points, centroids):
     '''
-    find the centroid in centroids with the minimum L1 distance with line_point
-    :param line_point: (1,M)
+    find
+    :param points: (N,M)
     :param centroids: (K,M)
-    :return: nearest_centroid: (1,M)
+    :return: nearest_centroid: (N,M) each points' nearest_centroid
     '''
-    # print(centroids.shape)
-    # print(line_point.shape)
-
-    distances = np.apply_along_axis(L1_distance, 1, arr=centroids, point2=line_point)
-    # print(distances)
-    nearest_centroid_index = np.argmin(distances)
+    distances = L1_distance(points,centroids)
+    nearest_centroid_index = np.argmin(distances,axis=1)
     nearest_centroid = centroids[nearest_centroid_index]
     return nearest_centroid
 
-def L1_distance(point1,point2):
+def L1_distance(points,centroids):
     '''
     L1 distance
-    :param point1: (1,M)
-    :param point2: (1,M)
-    :return: L1 distance: float64
+    :param points: (N,M)
+    :param centroids: (K,M)
+    :return: np.array with shape(N,K) each line is the L1 distance of (point, all centroids)
     '''
-    # print(point1.shape, point2.shape)
-    return np.sum(np.abs(point2 - point1))
+    return np.abs(points[:,None]- centroids).sum(axis=2)
 
 
 
@@ -152,7 +159,7 @@ if __name__ == '__main__':
     # print(Centroids_File[0])
     # print(Centroids_File.shape)
     start = time.time()
-    codebooks, codes = pq(data=Data_File, P=4, init_centroids=Centroids_File, max_iter=20)
+    codebooks, codes = pq(data=Data_File, P=2, init_centroids=Centroids_File, max_iter=20)
     end = time.time()
     time_cost_1 = end - start
     print(f'Runtime: {time_cost_1}')
