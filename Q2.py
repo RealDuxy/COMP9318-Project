@@ -9,7 +9,24 @@ import helper as h
 import main
 import pickle
 import time
+def split_data(data, P=2,axis=1):
+    '''
+    split data into P parts
+    :param data: (N,M)
+    :param P:
+    :return: (P,N,M/P) A list of sub-arrays.
+    '''
+    return np.split(data,P,axis)
 
+
+def L1_distance(point1,point2):
+    '''
+    L1 distance
+    :param point1: (1,M)
+    :param point2: (1,M)
+    :return: L1 distance: float64
+    '''
+    return np.sum(np.abs(point2 - point1))
 def find_nearest(point,codebooks, codes, T = 10):
     '''
     PQ Query working with L1 distance
@@ -45,7 +62,6 @@ def find_nearest(point,codebooks, codes, T = 10):
     return set(nearest_point[0])
 def query(queries, codebooks, codes, T):
     '''
-
     :param queries:
     :param codebooks:
     :param codes:
@@ -53,11 +69,13 @@ def query(queries, codebooks, codes, T):
     :return:
     '''
     candidates = []  
-    for i in range(len(queries)):
-        query =  split_data(queries[i], P=2,axis=1)    
-        nearest_point = find_nearest(query,codebooks, codes, T)  
+    N,M = queries.shape
+    print(N,M)
+    for i in range(N):
+        point =  split_data(queries[i], P=2,axis=0)    
+        nearest_point = find_nearest(point,codebooks, codes, T)  
         candidates.append(nearest_point)  
-    return candidates 
+    return candidates
 
 # runtest for Q2
 if __name__ == '__main__':
