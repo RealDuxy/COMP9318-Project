@@ -72,7 +72,7 @@ def K_means(centroid, data):
 
     all_cluster,_ = min_distance(data, centroid)
     # all_cluster = min_distance(line_point=)
-    new_centroids = np.apply_along_axis(update_centroid, 1, arr=centroid, all_cluster=all_cluster)
+    new_centroids = np.apply_along_axis(update_centroid, 1, arr=centroid, all_cluster=all_cluster,points=data)
     return new_centroids
 
 def min_distance(points, centroids):
@@ -99,22 +99,53 @@ def L1_distance(points,centroids):
 
 
 
-def get_cluster_data(centroid,all_cluster):
-    '''
-    find all data belong to the centroid
-    :param centroid:(1,M) a particular centoid
-    :param all_cluster: (M,1)
-    :return:
-    '''
+# def get_cluster_data(centroid,all_cluster):
+#     '''
+#     find all data belong to the centroid
+#     :param centroid:(1,M) a particular centoid
+#     :param all_cluster: (M,1)
+#     :return:
+#     '''
+#
+#     correspoding_all_cluster = np.extract(all_cluster == centroid, all_cluster)
+#     # print(correspoding_all_cluster.shape)
+#     if len(correspoding_all_cluster) > 0:
+#         return correspoding_all_cluster.reshape(-1, centroid.shape[0])
+#     else:
+#         return correspoding_all_cluster
 
-    correspoding_all_cluster = np.extract(all_cluster == centroid, all_cluster)
-    print(correspoding_all_cluster.shape)
-    if len(correspoding_all_cluster) > 0:
+
+def get_cluster_data(centroid, all_cluster, points):
+    '''
+    寻找属于某一个（行）centroid 的所有points
+    :param centroid:(1,M) a particular centoid
+    :param all_cluster: (N,M) 记录每个point所归属的centroid
+    :param points: all points
+    :return:（?,M）每一行代表一个point
+    '''
+    #     print(f"getting cluster: {centroid}")
+    condition = (centroid == all_cluster) * np.ones(shape=all_cluster.shape)
+    #     print(condition)
+    condition = (condition.sum(axis=1) == all_cluster.shape[1])
+    #     print(condition)
+    #     correspoding_all_cluster = np.extract(condition[:,None],all_cluster)
+    #     correspoding_all_cluster = np.where(condition==True,all_cluster,condition)
+    correspoding_all_cluster_index = np.argwhere(condition == True)[None, :]
+    # print("行数：",correspoding_all_cluster_index)
+    # print(correspoding_all_cluster_index)
+    correspoding_all_cluster = points[correspoding_all_cluster_index].reshape(-1,all_cluster.shape[1])
+
+
+
+
+
+    #     print("there",correspoding_all_cluster)
+    if correspoding_all_cluster.shape[-1] > 0:
         return correspoding_all_cluster.reshape(-1, centroid.shape[0])
     else:
         return correspoding_all_cluster
 
-def update_centroid(centroid,all_cluster):
+def update_centroid(centroid,all_cluster,points):
     '''
 
     :param centroid:
@@ -122,7 +153,7 @@ def update_centroid(centroid,all_cluster):
     :return:
     '''
 
-    all_data = get_cluster_data(centroid,all_cluster)
+    all_data = get_cluster_data(centroid,all_cluster,points)
     # print(all_data.shape)
     if len(all_data) > 0 :
         # 求all_data 在每个维度的上中位数
@@ -137,15 +168,19 @@ if __name__ == '__main__':
         Data_File = pickle.load(f, encoding='bytes')
     with open(centorid_path, 'rb') as f:
         Centroids_File = pickle.load(f, encoding='bytes')
+    with open(codebooks_path, 'rb') as f:
+        codebooks_2 = pickle.load(f, encoding='bytes')
+    with open(codes_path, 'rb') as f:
+        code_2 = pickle.load(f, encoding='bytes')
     start = time.time()
     codebooks, codes = pq(data=Data_File, P=p, init_centroids=Centroids_File, max_iter=20)
     end = time.time()
     time_cost_1 = end - start
     print(f'Runtime: {time_cost_1}')
-    # print(codebooks)
+    print((codebooks==codebooks_2))
     # print(codebooks.shape)
-    # print(codes)
-    # print(codes.shape)
+    print((codes==code_2))
+    print(codes)
 
 
 

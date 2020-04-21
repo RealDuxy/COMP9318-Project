@@ -39,10 +39,8 @@ def runMain():
     time_cost_1 = end - start
     print(f'Q1 runtime: {time_cost_1}')
     # output for part2
-    print(f'codebooks: {codebooks}')
-    print(f'real {codebooks_2}')
-    print(f'codes: {codes}')
-    print(f'real code {codes_2}')
+    print(f'codebooks: {(codebooks==codebooks_2).all()}')
+    print(f'codes: {(codes==codes_2).all()}')
 
     # How to run your implementation for Part 2
     with open(query_path, 'rb') as f:

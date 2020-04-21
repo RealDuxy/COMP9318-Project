@@ -47,7 +47,7 @@ def L1_distance(point1,point2):
 
 # runtest
 if __name__ == '__main__':
-    display_data(data_path)
+#     display_data(data_path)
     display_data(centorid_path)
     display_data(codebooks_path)
     display_data(codes_path)
