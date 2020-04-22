@@ -42,7 +42,7 @@ def pq(data, P, init_centroids, max_iter=20):
         epoch = 1
 
         while epoch <= max_iter:
-            print(f'epoch :{epoch}       max_iter: {max_iter}')
+            # print(f'epoch :{epoch}       max_iter: {max_iter}')
             centroids = K_means(centroids, data_block)
             epoch += 1
         # now we get new_centroid = initial_centroid = (p,k,m/p) = codebooks
@@ -184,7 +184,7 @@ if __name__ == '__main__':
     end = time.time()
     time_cost_1 = end - start
     print(f'Runtime: {time_cost_1}')
-    print((codebooks))
+    print((codebooks==codebooks_2).all())
     # print(codebooks.shape)
     print((codes==code_2).all())
     print(codes)
