@@ -61,7 +61,7 @@ def find_nearest(point,codebooks, codes, T = 10):
     for i in range(len(nearest_point[0])): 
             alldis[nearest_point[0][i]] = da 
     while (True): 
-        if len(nearest_point[0])  >= 10: 
+        if len(nearest_point[0])  >= T: 
             break  
         temp = np.where(alldis==np.min(alldis)) 
         for i in range(len(temp[0])): 
