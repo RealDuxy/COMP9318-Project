@@ -40,12 +40,18 @@ def pq(data, P, init_centroids, max_iter=20):
         centroids = init_centroids[i]
         data_block = data_blocks[i]
         epoch = 1
+
         while epoch <= max_iter:
             print(f'epoch :{epoch}       max_iter: {max_iter}')
             centroids = K_means(centroids, data_block)
             epoch += 1
         # now we get new_centroid = initial_centroid = (p,k,m/p) = codebooks
         codebooks.append(centroids.tolist())
+
+        # 如果code全对，nearest_index也是对的，说明centroids按理来说应该是被更新过得
+        # 检验一下centroids[i]有没有被更新
+        print((centroids == init_centroids[i]).all())
+        # 看起来centroid更新了？
         _, nearest_index = min_distance(data_block, centroids)
         # nearest_index = np.transpose(nearest_index)
         code.append(nearest_index.tolist())
@@ -178,7 +184,7 @@ if __name__ == '__main__':
     end = time.time()
     time_cost_1 = end - start
     print(f'Runtime: {time_cost_1}')
-    print((codebooks==codebooks_2))
+    print((codebooks))
     # print(codebooks.shape)
     print((codes==code_2).all())
     print(codes)
