@@ -56,7 +56,7 @@ def pq(data, P, init_centroids, max_iter=20):
         # nearest_index = np.transpose(nearest_index)
         code.append(nearest_index.tolist())
     code = np.transpose(code)
-    return np.array(codebooks,dtype = 'float32'), np.array(code,dtype = 'uint8')
+    return np.array(codebooks), np.array(code)
 
 
 def split_data(data, P=2,axis=1):
