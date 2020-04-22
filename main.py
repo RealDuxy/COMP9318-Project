@@ -27,6 +27,7 @@ codebooks_path = './toy_example/example/Codebooks_1'
 codes_path = './toy_example/example/Codes_1'
 query_path = './toy_example/example/Query_File_1'
 p=2
+
 def runMain():
     # How to run your implementation for Part 1
     with open(data_path, 'rb') as f:
@@ -53,7 +54,7 @@ def runMain():
 
     print(f'Q2 runtime: {time_cost_2}')
     # output for part 2.
-    print(f'candidates: {candidates==candidates_2}')
+    print(f'candidates: {(candidates==candidates_2).all()}')
 
 # runtest
 if __name__ == '__main__':
