@@ -2,10 +2,10 @@ import numpy as np
 import pickle
 import time
 
-data_path = './example/Data_File_2'
-centorid_path = './example/Centroids_File_2'
-codebooks_path = './example/Codebooks_2'
-codes_path = './example/Codes_2'
+data_path = './toy_example/example/Data_File_2'
+centorid_path = './toy_example/example/Centroids_File_2'
+codebooks_path = './toy_example/example/Codebooks_2'
+codes_path = './toy_example/example/Codes_2'
 p = 4
 
 
@@ -101,10 +101,10 @@ if __name__ == '__main__':
     print('Duxyp1_2.py')
     print(f'Runtime: {time_cost_1}')
     print('codebooks')
-    print((codebooks==codebooks_2))
+    print((codebooks==codebooks_2).all())
     # print(codebooks.shape)
     print('codes')
-    print((codes==code_2))
+    print((codes==code_2).all())
     #print(codes)
     #print(code_2)
     #print(codebooks)
