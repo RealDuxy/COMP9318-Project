@@ -33,15 +33,15 @@ def pq(data, P, init_centroids, max_iter=20):
              codes: an array with shape (N, P) and dtype=='uint8'
     '''
     data_blocks = split_data(data,P)
-    epoch = 1
+
     codebooks = []
     code = []
     for i in range(P):
         centroids = init_centroids[i]
         data_block = data_blocks[i]
-
+        epoch = 1
         while epoch <= max_iter:
-            # print(f'epoch :{epoch}       max_iter: {max_iter}')
+            print(f'epoch :{epoch}       max_iter: {max_iter}')
             centroids = K_means(centroids, data_block)
             epoch += 1
         # now we get new_centroid = initial_centroid = (p,k,m/p) = codebooks
@@ -72,8 +72,9 @@ def K_means(centroid, data):
 
     all_cluster,_ = min_distance(data, centroid)
     # all_cluster = min_distance(line_point=)
-    new_centroids = np.apply_along_axis(update_centroid, 1, arr=centroid, all_cluster=all_cluster,points=data)
-    return new_centroids
+    centroid = np.apply_along_axis(update_centroid, 1, arr=centroid, all_cluster=all_cluster,points=data)
+
+    return centroid
 
 def min_distance(points, centroids):
     '''
@@ -179,7 +180,7 @@ if __name__ == '__main__':
     print(f'Runtime: {time_cost_1}')
     print((codebooks==codebooks_2))
     # print(codebooks.shape)
-    print((codes==code_2))
+    print((codes==code_2).all())
     print(codes)
 
 
